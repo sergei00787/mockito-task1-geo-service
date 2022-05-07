@@ -15,7 +15,7 @@ import ru.netology.sender.MessageSenderImpl;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MesegeSenderTest {
+public class MessageSenderTest {
     @ParameterizedTest
     @ValueSource(strings = {"172.0.32.11", "172.0.32.1"})
     public void sendMessageWithRussianIp_isReturnRussianHelloString(String ipAddress) {
@@ -27,7 +27,7 @@ public class MesegeSenderTest {
 
         MessageSender messageSender = new MessageSenderImpl(geoService, localizationService);
 
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, ipAddress);
 
         Assertions.assertEquals(messageSender.send(headers), "Добро пожаловать");
@@ -44,7 +44,7 @@ public class MesegeSenderTest {
 
         MessageSender messageSender = new MessageSenderImpl(geoService, localizationService);
 
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, ipAddress);
 
         Assertions.assertEquals(messageSender.send(headers), "Welcome");
@@ -60,7 +60,7 @@ public class MesegeSenderTest {
 
         MessageSender messageSender = new MessageSenderImpl(geoService, localizationService);
 
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, "127.0.0.1");
 
         Assertions.assertNull(messageSender.send(headers));
