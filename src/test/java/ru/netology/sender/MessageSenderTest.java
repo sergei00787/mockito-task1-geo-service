@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.sender;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,8 +9,6 @@ import ru.netology.entity.Country;
 import ru.netology.entity.Location;
 import ru.netology.geo.GeoService;
 import ru.netology.i18n.LocalizationService;
-import ru.netology.sender.MessageSender;
-import ru.netology.sender.MessageSenderImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,14 +21,14 @@ public class MessageSenderTest {
         Mockito.when(geoService.byIp(ipAddress)).thenReturn(new Location("Moscow", Country.RUSSIA, "Lenina", 15));
 
         LocalizationService localizationService = Mockito.mock(LocalizationService.class);
-        Mockito.when(localizationService.locale(Country.RUSSIA)).thenReturn("Добро пожаловать");
+        Mockito.when(localizationService.locale(Country.RUSSIA)).thenReturn("Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ");
 
         MessageSender messageSender = new MessageSenderImpl(geoService, localizationService);
 
         Map<String, String> headers = new HashMap<>();
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, ipAddress);
 
-        Assertions.assertEquals(messageSender.send(headers), "Добро пожаловать");
+        Assertions.assertEquals("Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ", messageSender.send(headers));
     }
 
     @ParameterizedTest
@@ -47,7 +45,7 @@ public class MessageSenderTest {
         Map<String, String> headers = new HashMap<>();
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, ipAddress);
 
-        Assertions.assertEquals(messageSender.send(headers), "Welcome");
+        Assertions.assertEquals("Welcome", messageSender.send(headers));
     }
 
     @Test

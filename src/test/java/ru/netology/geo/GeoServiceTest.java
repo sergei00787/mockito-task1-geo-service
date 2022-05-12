@@ -1,12 +1,10 @@
-package ru.netology;
+package ru.netology.geo;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.netology.entity.Country;
 import ru.netology.entity.Location;
-import ru.netology.geo.GeoService;
-import ru.netology.geo.GeoServiceImpl;
 
 public class GeoServiceTest {
     static GeoService geoService;
@@ -18,27 +16,27 @@ public class GeoServiceTest {
 
     @Test
     public void ifByIpArgumentIsMoscowIp_thenReturnMoscowLocation() {
-        Assertions.assertEquals(geoService.byIp(GeoServiceImpl.MOSCOW_IP), new Location("Moscow", Country.RUSSIA, "Lenina", 15));
+        Assertions.assertEquals(new Location("Moscow", Country.RUSSIA, "Lenina", 15), geoService.byIp(GeoServiceImpl.MOSCOW_IP));
     }
 
     @Test
     public void ifByIpArgumentIsRussianIp_thenReturnRussianLocation() {
-        Assertions.assertEquals(geoService.byIp("172.192.1.30"), new Location("Moscow", Country.RUSSIA, null, 0));
+        Assertions.assertEquals(new Location("Moscow", Country.RUSSIA, null, 0), geoService.byIp("172.192.1.30"));
     }
 
     @Test
     public void ifByIpArgumentIsNewYorkIp_thenReturnNewYorkLocation() {
-        Assertions.assertEquals(geoService.byIp(GeoServiceImpl.NEW_YORK_IP), new Location("New York", Country.USA, " 10th Avenue", 32));
+        Assertions.assertEquals(new Location("New York", Country.USA, " 10th Avenue", 32), geoService.byIp(GeoServiceImpl.NEW_YORK_IP));
     }
 
     @Test
     public void ifByIpArgumentIsAmericanIp_thenReturnAmericanLocation() {
-        Assertions.assertEquals(geoService.byIp("96.88.191.20"), new Location("New York", Country.USA, null, 0));
+        Assertions.assertEquals(new Location("New York", Country.USA, null, 0), geoService.byIp("96.88.191.20"));
     }
 
     @Test
     public void ifByIpArgumentIsLoaclhostIp_thenReturnEmptyLocation() {
-        Assertions.assertEquals(geoService.byIp(GeoServiceImpl.LOCALHOST), new Location(null, null, null, 0));
+        Assertions.assertEquals(new Location(null, null, null, 0), geoService.byIp(GeoServiceImpl.LOCALHOST));
     }
 
     @Test
